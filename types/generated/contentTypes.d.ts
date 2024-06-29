@@ -375,10 +375,15 @@ export interface ApiEstablishmentEstablishment extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    phone: Attribute.BigInteger & Attribute.Required;
     email: Attribute.Email & Attribute.Required & Attribute.Unique;
     password: Attribute.Password & Attribute.Required;
     address: Attribute.String;
+    admin_user: Attribute.Relation<
+      'api::establishment.establishment',
+      'oneToOne',
+      'admin::user'
+    >;
+    phone: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -730,7 +735,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -758,6 +762,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.user',
       'manyToOne',
       'plugin::users-permissions.role'
+    >;
+    establishment: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::establishment.establishment'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
