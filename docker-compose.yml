@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  strapi:
+    build: .
+    ports:
+      - '1337:1337'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_NAME: strapiDB
+      DATABASE_USERNAME: docker
+      DATABASE_PASSWORD: docker
+    command: npm run develop
+
+  postgres:
+    image: bitnami/postgresql:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=strapiDB
+    volumes:
+      - postgres_data:/bitnami/postgresql
+
+volumes:
+  postgres_data:
