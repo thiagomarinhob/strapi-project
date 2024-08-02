@@ -4,26 +4,50 @@
   "info": {
     "singularName": "sale",
     "pluralName": "sales",
-    "displayName": "sale"
+    "displayName": "order",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "products": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::product.product"
-    },
-    "sale_date": {
+    "date_order": {
       "type": "datetime"
-    },
-    "weight": {
-      "type": "decimal"
     },
     "total_price": {
       "type": "float"
+    },
+    "status_order": {
+      "type": "enumeration",
+      "enum": [
+        "received",
+        "approved",
+        "in_process",
+        "in_delivery",
+        "refused",
+        "concluded"
+      ]
+    },
+    "establishment": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::establishment.establishment"
+    },
+    "order_items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-item.order-item",
+      "mappedBy": "order"
+    },
+    "payment_type": {
+      "type": "enumeration",
+      "enum": [
+        "pix",
+        "card",
+        "cash",
+        "on credit"
+      ]
     }
   }
 }

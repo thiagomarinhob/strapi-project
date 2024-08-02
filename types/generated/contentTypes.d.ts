@@ -362,109 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiEstablishmentEstablishment extends Schema.CollectionType {
-  collectionName: 'establishments';
-  info: {
-    singularName: 'establishment';
-    pluralName: 'establishments';
-    displayName: 'Establishment';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    email: Attribute.Email & Attribute.Required & Attribute.Unique;
-    password: Attribute.Password & Attribute.Required;
-    address: Attribute.String;
-    admin_user: Attribute.Relation<
-      'api::establishment.establishment',
-      'oneToOne',
-      'admin::user'
-    >;
-    phone: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::establishment.establishment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::establishment.establishment',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProductProduct extends Schema.CollectionType {
-  collectionName: 'products';
-  info: {
-    singularName: 'product';
-    pluralName: 'products';
-    displayName: 'Product';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    description: Attribute.String;
-    price: Attribute.Float;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::product.product',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSaleSale extends Schema.CollectionType {
-  collectionName: 'sales';
-  info: {
-    singularName: 'sale';
-    pluralName: 'sales';
-    displayName: 'sale';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    products: Attribute.Relation<
-      'api::sale.sale',
-      'oneToMany',
-      'api::product.product'
-    >;
-    sale_date: Attribute.DateTime;
-    weight: Attribute.Decimal;
-    total_price: Attribute.Float;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -895,6 +792,245 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'category';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.String;
+    products: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClientClient extends Schema.CollectionType {
+  collectionName: 'clients';
+  info: {
+    singularName: 'client';
+    pluralName: 'clients';
+    displayName: 'client';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    phone: Attribute.String;
+    password: Attribute.Password;
+    cpf: Attribute.BigInteger;
+    avatar_client: Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::client.client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::client.client',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEstablishmentEstablishment extends Schema.CollectionType {
+  collectionName: 'establishments';
+  info: {
+    singularName: 'establishment';
+    pluralName: 'establishments';
+    displayName: 'Establishment';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    address: Attribute.String;
+    admin_user: Attribute.Relation<
+      'api::establishment.establishment',
+      'oneToOne',
+      'admin::user'
+    >;
+    phone: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::establishment.establishment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::establishment.establishment',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderItemOrderItem extends Schema.CollectionType {
+  collectionName: 'order_items';
+  info: {
+    singularName: 'order-item';
+    pluralName: 'order-items';
+    displayName: 'OrderItem';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    order: Attribute.Relation<
+      'api::order-item.order-item',
+      'manyToOne',
+      'api::sale.sale'
+    >;
+    product: Attribute.Relation<
+      'api::order-item.order-item',
+      'oneToOne',
+      'api::product.product'
+    >;
+    amount: Attribute.Integer;
+    sub_price: Attribute.Float;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order-item.order-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order-item.order-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'Product';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    description: Attribute.String;
+    price: Attribute.Float;
+    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
+    active: Attribute.Boolean;
+    category: Attribute.Relation<
+      'api::product.product',
+      'manyToOne',
+      'api::category.category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSaleSale extends Schema.CollectionType {
+  collectionName: 'sales';
+  info: {
+    singularName: 'sale';
+    pluralName: 'sales';
+    displayName: 'order';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    date_order: Attribute.DateTime;
+    total_price: Attribute.Float;
+    status_order: Attribute.Enumeration<
+      [
+        'received',
+        'approved',
+        'in_process',
+        'in_delivery',
+        'refused',
+        'concluded'
+      ]
+    >;
+    establishment: Attribute.Relation<
+      'api::sale.sale',
+      'oneToOne',
+      'api::establishment.establishment'
+    >;
+    order_items: Attribute.Relation<
+      'api::sale.sale',
+      'oneToMany',
+      'api::order-item.order-item'
+    >;
+    payment_type: Attribute.Enumeration<['pix', 'card', 'cash', 'on credit']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::sale.sale', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -905,9 +1041,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::establishment.establishment': ApiEstablishmentEstablishment;
-      'api::product.product': ApiProductProduct;
-      'api::sale.sale': ApiSaleSale;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -916,6 +1049,12 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::category.category': ApiCategoryCategory;
+      'api::client.client': ApiClientClient;
+      'api::establishment.establishment': ApiEstablishmentEstablishment;
+      'api::order-item.order-item': ApiOrderItemOrderItem;
+      'api::product.product': ApiProductProduct;
+      'api::sale.sale': ApiSaleSale;
     }
   }
 }
