@@ -905,6 +905,41 @@ export interface ApiEstablishmentEstablishment extends Schema.CollectionType {
   };
 }
 
+export interface ApiHomePageHomePage extends Schema.SingleType {
+  collectionName: 'home_pages';
+  info: {
+    singularName: 'home-page';
+    pluralName: 'home-pages';
+    displayName: 'Home Page';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    description: Attribute.Text;
+    blocks: Attribute.DynamicZone<
+      ['layout.hero-section', 'layout.features-section']
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::home-page.home-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::home-page.home-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiOrderItemOrderItem extends Schema.CollectionType {
   collectionName: 'order_items';
   info: {
@@ -1052,6 +1087,7 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::client.client': ApiClientClient;
       'api::establishment.establishment': ApiEstablishmentEstablishment;
+      'api::home-page.home-page': ApiHomePageHomePage;
       'api::order-item.order-item': ApiOrderItemOrderItem;
       'api::product.product': ApiProductProduct;
       'api::sale.sale': ApiSaleSale;
