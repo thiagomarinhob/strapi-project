@@ -811,6 +811,12 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'oneToMany',
       'api::product.product'
     >;
+    establishment: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'api::establishment.establishment'
+    >;
+    image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -887,6 +893,8 @@ export interface ApiEstablishmentEstablishment extends Schema.CollectionType {
       'admin::user'
     >;
     phone: Attribute.String;
+    bio: Attribute.Text;
+    image: Attribute.Media<'images'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1030,12 +1038,17 @@ export interface ApiProductProduct extends Schema.CollectionType {
     name: Attribute.String;
     description: Attribute.String;
     price: Attribute.Float;
-    image: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true>;
-    active: Attribute.Boolean;
+    image: Attribute.Media<'images'>;
+    active: Attribute.Boolean & Attribute.DefaultTo<true>;
     category: Attribute.Relation<
       'api::product.product',
       'manyToOne',
       'api::category.category'
+    >;
+    establishment: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::establishment.establishment'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
